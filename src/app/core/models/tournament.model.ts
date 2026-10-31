@@ -6,6 +6,13 @@ export interface Player {
   name: string;
   mark: Mark;
 }
+export interface PlayerRecord {
+  id: string;
+  name: string;
+  wins: number;
+  losses: number;
+  draws: number;
+}
 export interface TournamentConfig {
   players: readonly [Player, Player];
   totalGames: GameCount;
