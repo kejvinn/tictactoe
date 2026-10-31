@@ -1,0 +1,17 @@
+<div formGroupName="local">
+  <label for="player1Name">Player 1 name</label>
+  <input id="player1Name" type="text" formControlName="player1Name" />
+  @if (nameError('player1Name'); as error) {
+    <p>{{ error }}</p>
+  }
+
+  <label for="player2Name">Player 2 name</label>
+  <input id="player2Name" type="text" formControlName="player2Name" />
+  @if (nameError('player2Name'); as error) {
+    <p>{{ error }}</p>
+  }
+
+  <button type="button" [disabled]="local.invalid" (click)="setup.goTo('pre-game')">
+    Next Stage
+  </button>
+</div>
