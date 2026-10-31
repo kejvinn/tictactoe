@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { tournamentGuard } from './features/in-game/tournament.guard';
 
 export const routes: Routes = [
   {
@@ -7,6 +8,7 @@ export const routes: Routes = [
   },
   {
     path: 'game',
+    canActivate: [tournamentGuard],
     loadComponent: () =>
       import('./features/in-game/in-game.component').then((m) => m.InGameComponent),
   },

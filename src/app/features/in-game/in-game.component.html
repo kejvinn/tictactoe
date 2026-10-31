@@ -1,1 +1,20 @@
-<p>in-game works!</p>
+@if (store.players(); as players) {
+  <app-scoreboard
+    [players]="players"
+    [scores]="store.scores()"
+    [progressLabel]="store.progressLabel()"
+  />
+
+  <p>{{ status() }}</p>
+
+  <app-board
+    [board]="store.board()"
+    [winningLine]="store.winningLine()"
+    [locked]="store.isRoundOver()"
+    (cellSelected)="store.play($event)"
+  />
+
+  @if (showNextGame()) {
+    <button type="button" (click)="store.nextGame()">Next game</button>
+  }
+}
