@@ -1,16 +1,20 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, linkedSignal } from '@angular/core';
+import { Router } from '@angular/router';
 import { TournamentStore } from '../../core/store/tournament.store';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { BoardComponent } from './components/board/board.component';
+import { ResultsComponent } from './components/results/results.component';
 import { ScoreboardComponent } from './components/scoreboard/scoreboard.component';
 
 @Component({
-  imports: [BoardComponent, ScoreboardComponent],
+  imports: [BoardComponent, ScoreboardComponent, ModalComponent, ResultsComponent],
   selector: 'app-in-game',
   styleUrl: './in-game.component.scss',
   templateUrl: './in-game.component.html',
 })
 export class InGameComponent {
   store = inject(TournamentStore);
+  private readonly router = inject(Router);
 
   status = computed(() => {
     const store = this.store;
@@ -26,4 +30,11 @@ export class InGameComponent {
   });
 
   showNextGame = computed(() => this.store.isRoundOver() && !this.store.isTournamentOver());
+
+  resultsOpen = linkedSignal(() => this.store.isTournamentOver());
+
+  playAgain(): void {
+    this.store.reset();
+    this.router.navigate(['/']);
+  }
 }

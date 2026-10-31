@@ -1,1 +1,5 @@
-<p>modal works!</p>
+<dialog #dialog (close)="open.set(false)">
+  <h2>{{ heading() }}</h2>
+  <ng-content />
+  <button type="button" (click)="open.set(false)">Close</button>
+</dialog>

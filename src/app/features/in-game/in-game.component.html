@@ -17,4 +17,18 @@
   @if (showNextGame()) {
     <button type="button" (click)="store.nextGame()">Next game</button>
   }
+
+  @if (store.isTournamentOver()) {
+    <button type="button" (click)="resultsOpen.set(true)">Show results</button>
+  }
+
+  <app-modal heading="Tournament results" [(open)]="resultsOpen">
+    <app-results
+      [players]="players"
+      [results]="store.results()"
+      [scores]="store.scores()"
+      [winner]="store.tournamentWinner()"
+      (playAgain)="playAgain()"
+    />
+  </app-modal>
 }
