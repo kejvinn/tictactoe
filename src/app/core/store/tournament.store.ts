@@ -177,8 +177,12 @@ export const TournamentStore = signalStore(
         patchState(store, { gameNumber, board: emptyBoard(), turn: firstMarkFor(gameNumber) });
       },
 
-      reset(): void {
-        patchState(store, initialState);
+      restart(): void {
+        patchState(store, {
+          ...initialState,
+          players: store.players(),
+          totalGames: store.totalGames(),
+        });
       },
     };
   }),

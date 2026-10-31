@@ -1,5 +1,4 @@
 import { Component, computed, inject, linkedSignal, signal } from '@angular/core';
-import { Router } from '@angular/router';
 import { TournamentStore } from '../../core/store/tournament.store';
 import { LeaderboardComponent } from '../../shared/components/leaderboard/leaderboard.component';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
@@ -21,7 +20,6 @@ import { ScoreboardComponent } from './components/scoreboard/scoreboard.componen
 })
 export class InGameComponent {
   store = inject(TournamentStore);
-  private readonly router = inject(Router);
 
   status = computed(() => {
     const store = this.store;
@@ -42,7 +40,6 @@ export class InGameComponent {
   leaderboardOpen = signal(false);
 
   playAgain(): void {
-    this.store.reset();
-    this.router.navigate(['/']);
+    this.store.restart();
   }
 }
