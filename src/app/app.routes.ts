@@ -12,5 +12,12 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/in-game/in-game.component').then((m) => m.InGameComponent),
   },
+  {
+    path: 'leaderboard',
+    loadComponent: () =>
+      import('./features/leaderboard/leaderboard-page.component').then(
+        (m) => m.LeaderboardPageComponent,
+      ),
+  },
   { path: '**', redirectTo: '' },
 ];

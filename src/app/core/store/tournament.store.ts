@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { computed, inject } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, EMPTY, pipe, switchMap, tap } from 'rxjs';
+import { catchError, EMPTY, forkJoin, pipe, switchMap, tap } from 'rxjs';
+import { PlayersApiService } from '../api/players-api.service';
 import {
   emptyBoard,
   findWinningLine,
@@ -14,12 +14,11 @@ import {
   GameResult,
   Mark,
   Player,
+  PlayerRecord,
   Scores,
   TournamentConfig,
   TournamentState,
 } from '../models/tournament.model';
-
-const API_URL = 'http://localhost:3000';
 
 const initialState: TournamentState = {
   players: null,
@@ -33,6 +32,10 @@ const initialState: TournamentState = {
 
 function findPlayer(players: TournamentState['players'], mark: Mark): Player | null {
   return players?.find((player) => player.mark === mark) ?? null;
+}
+
+function sameName(a: string, b: string): boolean {
+  return a.trim().toLowerCase() === b.trim().toLowerCase();
 }
 
 function countScores(results: readonly GameResult[]): Scores {
@@ -83,25 +86,39 @@ export const TournamentStore = signalStore(
     };
   }),
 
-  withMethods((store, http = inject(HttpClient)) => {
+  withMethods((store, api = inject(PlayersApiService)) => {
     const setSaveStatus = (saveStatus: TournamentState['saveStatus']) =>
       patchState(store, { saveStatus });
 
-    const postTournament = () =>
-      http.post(`${API_URL}/games`, {
-        players: store.players(),
-        totalGames: store.totalGames(),
-        results: store.results(),
-        winner: store.tournamentWinner()?.name ?? null,
-        playedAt: new Date().toISOString(),
-      });
+    const outcomeFor = (player: Player): 'wins' | 'losses' | 'draws' => {
+      const winner = store.tournamentWinner();
+      if (!winner) {
+        return 'draws';
+      }
+      return winner.mark === player.mark ? 'wins' : 'losses';
+    };
+
+    const recordPlayer = (records: readonly PlayerRecord[], player: Player) => {
+      const record = records.find((r) => sameName(r.name, player.name));
+      const totals = {
+        wins: record?.wins ?? 0,
+        losses: record?.losses ?? 0,
+        draws: record?.draws ?? 0,
+      };
+      totals[outcomeFor(player)]++;
+      return record ? api.update(record.id, totals) : api.create({ name: player.name, ...totals });
+    };
+
+    const recordPlayers = (records: readonly PlayerRecord[]) =>
+      forkJoin((store.players() ?? []).map((player) => recordPlayer(records, player)));
 
     return {
-      saveResults: rxMethod<void>(
+      recordTournament: rxMethod<void>(
         pipe(
           tap(() => setSaveStatus('saving')),
           switchMap(() =>
-            postTournament().pipe(
+            api.list().pipe(
+              switchMap(recordPlayers),
               tap(() => setSaveStatus('saved')),
               catchError(() => {
                 setSaveStatus('error');
@@ -147,7 +164,7 @@ export const TournamentStore = signalStore(
 
         recordResult();
         if (store.isTournamentOver()) {
-          store.saveResults();
+          store.recordTournament();
         }
       },
 

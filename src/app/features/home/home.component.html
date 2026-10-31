@@ -18,5 +18,14 @@
         }
       </app-form-container>
     </form>
+
+    <button type="button" (click)="leaderboardOpen.set(true)">Leaderboard</button>
+
+    <app-modal heading="Leaderboard" [(open)]="leaderboardOpen">
+      @if (leaderboardOpen()) {
+        <app-leaderboard />
+        <a routerLink="/leaderboard">Open full page</a>
+      }
+    </app-modal>
   </div>
 </div>

@@ -22,6 +22,14 @@
     <button type="button" (click)="resultsOpen.set(true)">Show results</button>
   }
 
+  <button type="button" (click)="leaderboardOpen.set(true)">Leaderboard</button>
+
+  <app-modal heading="Leaderboard" [(open)]="leaderboardOpen">
+    @if (leaderboardOpen()) {
+      <app-leaderboard />
+    }
+  </app-modal>
+
   <app-modal heading="Tournament results" [(open)]="resultsOpen">
     <app-results
       [players]="players"
