@@ -2,14 +2,14 @@ import { computed, inject } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, forkJoin, pipe, switchMap, tap } from 'rxjs';
-import { PlayersApiService } from '../api/players-api.service';
+import { PlayersApiService } from '@core/api/players-api.service';
 import {
   emptyBoard,
   findWinningLine,
   firstMarkFor,
   isBoardFull,
   opposite,
-} from '../engine/game-engine';
+} from '@core/engine/game-engine';
 import {
   GameResult,
   Mark,
@@ -18,7 +18,7 @@ import {
   Scores,
   TournamentConfig,
   TournamentState,
-} from '../models/tournament.model';
+} from '@core/models/tournament.model';
 
 const initialState: TournamentState = {
   players: null,

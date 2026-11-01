@@ -2,16 +2,16 @@ import { Component, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { opposite } from '../../core/engine/game-engine';
-import { GameCount, Mark } from '../../core/models/tournament.model';
-import { TournamentStore } from '../../core/store/tournament.store';
+import { opposite } from '@core/engine/game-engine';
+import { GameCount, Mark } from '@core/models/tournament.model';
+import { TournamentStore } from '@core/store/tournament.store';
 import { distinctNames, nonBlank } from './setup.validators';
 import { LocalFormComponent } from './components/local-form/local-form.component';
 import { PreGameFormComponent } from './components/pre-game-form/pre-game-form.component';
 import { FormContainerComponent } from './components/form-container/form-container.component';
 import { SetupNavigationService } from './setup-navigation.service';
-import { ModalComponent } from '../../shared/components/modal/modal.component';
-import { LeaderboardComponent } from '../../shared/components/leaderboard/leaderboard.component';
+import { ModalComponent } from '@shared/components/modal/modal.component';
+import { LeaderboardComponent } from '@shared/components/leaderboard/leaderboard.component';
 
 @Component({
   imports: [

@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, map, of } from 'rxjs';
-import { PlayersApiService } from '../../../core/api/players-api.service';
-import { PlayerRecord } from '../../../core/models/tournament.model';
+import { PlayersApiService } from '@core/api/players-api.service';
+import { PlayerRecord } from '@core/models/tournament.model';
 
 function rank(players: PlayerRecord[]): PlayerRecord[] {
   return [...players].sort(

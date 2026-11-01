@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { Board } from '../../../../core/models/tournament.model';
+import { Board } from '@core/models/tournament.model';
 
 @Component({
   selector: 'app-board',

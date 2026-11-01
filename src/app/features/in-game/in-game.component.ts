@@ -1,7 +1,7 @@
 import { Component, computed, inject, linkedSignal, signal } from '@angular/core';
-import { TournamentStore } from '../../core/store/tournament.store';
-import { LeaderboardComponent } from '../../shared/components/leaderboard/leaderboard.component';
-import { ModalComponent } from '../../shared/components/modal/modal.component';
+import { TournamentStore } from '@core/store/tournament.store';
+import { LeaderboardComponent } from '@shared/components/leaderboard/leaderboard.component';
+import { ModalComponent } from '@shared/components/modal/modal.component';
 import { BoardComponent } from './components/board/board.component';
 import { ResultsComponent } from './components/results/results.component';
 import { ScoreboardComponent } from './components/scoreboard/scoreboard.component';

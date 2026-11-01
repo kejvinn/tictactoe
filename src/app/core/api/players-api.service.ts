@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
-import { PlayerRecord } from '../models/tournament.model';
+import { PlayerRecord } from '@core/models/tournament.model';
 import { API_URL } from './api-url';
 
 @Service()

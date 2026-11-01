@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { SetupNavigationService } from '../../setup-navigation.service';
+import { SetupNavigationService } from '@features/home/setup-navigation.service';
 
 @Component({
   selector: 'app-form-container',

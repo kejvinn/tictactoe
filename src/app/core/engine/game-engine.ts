@@ -1,4 +1,4 @@
-import { Board, Mark, WIN_LINES } from '../models/tournament.model';
+import { Board, Mark, WIN_LINES } from '@core/models/tournament.model';
 
 export function emptyBoard(): Board {
   return Array(9).fill(null);

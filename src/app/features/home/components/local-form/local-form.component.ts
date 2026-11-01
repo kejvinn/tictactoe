@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ControlContainer, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
-import { SetupNavigationService } from '../../setup-navigation.service';
+import { SetupNavigationService } from '@features/home/setup-navigation.service';
 
 type NameControl = 'player1Name' | 'player2Name';
 

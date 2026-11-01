@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { tournamentGuard } from './features/in-game/tournament.guard';
+import { tournamentGuard } from '@features/in-game/tournament.guard';
 
 export const routes: Routes = [
   {

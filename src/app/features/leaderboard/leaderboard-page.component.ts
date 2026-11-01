@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LeaderboardComponent } from '../../shared/components/leaderboard/leaderboard.component';
+import { LeaderboardComponent } from '@shared/components/leaderboard/leaderboard.component';
 
 @Component({
   imports: [LeaderboardComponent, RouterLink],

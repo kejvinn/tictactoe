@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Player, Scores } from '../../../../core/models/tournament.model';
+import { Player, Scores } from '@core/models/tournament.model';
 
 @Component({
   selector: 'app-scoreboard',

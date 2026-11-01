@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ControlContainer, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
-import { GameCount, Mark } from '../../../../core/models/tournament.model';
+import { GameCount, Mark } from '@core/models/tournament.model';
 
 @Component({
   imports: [ReactiveFormsModule],
