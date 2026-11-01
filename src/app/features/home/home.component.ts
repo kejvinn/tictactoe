@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { opposite } from '@core/engine/game-engine';
+import { opposite } from '@core/rules/game-rules';
 import { GameCount, Mark } from '@core/models/tournament.model';
 import { TournamentStore } from '@core/store/tournament.store';
 import { distinctNames, nonBlank } from './setup.validators';

@@ -30,11 +30,10 @@ export interface Scores {
 export interface TournamentState {
   players: readonly [Player, Player] | null;
   totalGames: GameCount;
-  gameNumber: number;
+  currentGame: number;
   board: Board;
   turn: Mark;
   results: readonly GameResult[];
-  saveStatus: 'idle' | 'saving' | 'saved' | 'error';
 }
 
 export const WIN_LINES: readonly (readonly [number, number, number])[] = [

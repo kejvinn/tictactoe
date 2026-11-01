@@ -1,14 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { catchError, map, of } from 'rxjs';
-import { PlayersApiService } from '@core/api/players-api.service';
-import { PlayerRecord } from '@core/models/tournament.model';
-
-function rank(players: PlayerRecord[]): PlayerRecord[] {
-  return [...players].sort(
-    (a, b) => b.wins - a.wins || a.losses - b.losses || a.name.localeCompare(b.name),
-  );
-}
+import { catchError, of } from 'rxjs';
+import { LeaderboardService } from '@core/services/leaderboard.service';
 
 @Component({
   selector: 'app-leaderboard',
@@ -43,12 +36,9 @@ function rank(players: PlayerRecord[]): PlayerRecord[] {
 })
 export class LeaderboardComponent {
   players = toSignal(
-    inject(PlayersApiService)
-      .list()
-      .pipe(
-        map(rank),
-        catchError(() => of([])),
-      ),
+    inject(LeaderboardService)
+      .ranked()
+      .pipe(catchError(() => of([]))),
     { initialValue: [] },
   );
 }

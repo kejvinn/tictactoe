@@ -26,12 +26,12 @@ export class InGameComponent {
     const winner = store.roundWinner();
 
     if (!store.isRoundOver()) {
-      return `${store.currentPlayer()?.name}'s turn (${store.turn()})`;
+      return `${store.names()[store.turn()]}'s turn (${store.turn()})`;
     }
     if (winner) {
-      return `${store.names()[winner]} wins game ${store.gameNumber()}!`;
+      return `${store.names()[winner]} wins game ${store.currentGame()}!`;
     }
-    return `Game ${store.gameNumber()} is a draw.`;
+    return `Game ${store.currentGame()} is a draw.`;
   });
 
   showNextGame = computed(() => this.store.isRoundOver() && !this.store.isTournamentOver());
