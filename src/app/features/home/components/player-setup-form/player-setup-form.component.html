@@ -1,17 +1,11 @@
 <div formGroupName="playerSetup">
-  <label for="player1Name">Player 1 name</label>
+  <label for="player1Name">Player 1</label>
   <input id="player1Name" type="text" formControlName="player1Name" />
-  @if (nameError('player1Name'); as error) {
-    <p>{{ error }}</p>
-  }
+  <p>{{ nameError('player1Name') }}</p>
 
-  <label for="player2Name">Player 2 name</label>
+  <label for="player2Name">Player 2</label>
   <input id="player2Name" type="text" formControlName="player2Name" />
-  @if (nameError('player2Name'); as error) {
-    <p>{{ error }}</p>
-  }
+  <p>{{ nameError('player2Name') }}</p>
 
-  <button type="button" [disabled]="playerSetup.invalid" (click)="setup.goTo('pre-game')">
-    Next Stage
-  </button>
+  <button type="button" [disabled]="playerSetup.invalid" (click)="setup.goTo('pre-game')">Next</button>
 </div>

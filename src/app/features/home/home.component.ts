@@ -29,14 +29,14 @@ import { LeaderboardComponent } from '@shared/components/leaderboard/leaderboard
   providers: [SetupNavigationService],
 })
 export class HomeComponent {
-  fb = inject(NonNullableFormBuilder);
-  setup = inject(SetupNavigationService);
+  private readonly fb = inject(NonNullableFormBuilder);
+  readonly setup = inject(SetupNavigationService);
   private readonly store = inject(TournamentStore);
   private readonly router = inject(Router);
 
-  leaderboardOpen = signal(false);
+  readonly leaderboardOpen = signal(false);
 
-  setupForm = this.fb.group({
+  readonly setupForm = this.fb.group({
     playerSetup: this.fb.group(
       {
         player1Name: ['', [Validators.required, nonBlank, Validators.maxLength(20)]],

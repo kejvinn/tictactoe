@@ -19,9 +19,9 @@ import { ScoreboardComponent } from './components/scoreboard/scoreboard.componen
   templateUrl: './in-game.component.html',
 })
 export class InGameComponent {
-  store = inject(TournamentStore);
+  readonly store = inject(TournamentStore);
 
-  status = computed(() => {
+  readonly status = computed(() => {
     const store = this.store;
     const winner = store.roundWinner();
 
@@ -34,10 +34,12 @@ export class InGameComponent {
     return `Game ${store.currentGame()} is a draw.`;
   });
 
-  showNextGame = computed(() => this.store.isRoundOver() && !this.store.isTournamentOver());
+  readonly showNextGame = computed(
+    () => this.store.isRoundOver() && !this.store.isTournamentOver(),
+  );
 
-  resultsOpen = linkedSignal(() => this.store.isTournamentOver());
-  leaderboardOpen = signal(false);
+  readonly resultsOpen = linkedSignal(() => this.store.isTournamentOver());
+  readonly leaderboardOpen = signal(false);
 
   playAgain(): void {
     this.store.restart();

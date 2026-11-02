@@ -1,0 +1,20 @@
+div {
+  display: grid;
+  gap: 0.75rem;
+}
+
+p {
+  min-height: 1.2em;
+  margin: 0;
+  color: var(--color-x);
+  font-size: 0.8rem;
+  line-height: 1.2;
+
+  @media (max-width: 480px) {
+    min-height: 2.4em;
+  }
+}
+
+button {
+  justify-self: center;
+}

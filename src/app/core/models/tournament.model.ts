@@ -2,10 +2,12 @@ export type Mark = 'X' | 'O';
 export type Cell = Mark | null;
 export type Board = readonly Cell[];
 export type GameCount = 1 | 3 | 5;
+
 export interface Player {
   name: string;
   mark: Mark;
 }
+
 export interface PlayerRecord {
   id: string;
   name: string;
@@ -13,14 +15,17 @@ export interface PlayerRecord {
   losses: number;
   draws: number;
 }
+
 export interface TournamentConfig {
   players: readonly [Player, Player];
   totalGames: GameCount;
 }
+
 export interface GameResult {
   game: number;
   winner: Mark | null;
 }
+
 export interface Scores {
   X: number;
   O: number;

@@ -6,8 +6,8 @@ import { Component, effect, ElementRef, input, model, viewChild } from '@angular
   templateUrl: './modal.component.html',
 })
 export class ModalComponent {
-  open = model(false);
-  heading = input.required<string>();
+  readonly open = model(false);
+  readonly heading = input.required<string>();
 
   private readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
 

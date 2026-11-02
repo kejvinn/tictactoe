@@ -1,11 +1,6 @@
 <div class="home-container">
   <div class="home-content">
-    <h1>Welcome to Tic Tac Toe Tournament!</h1>
-    <p>
-      Get ready to challenge your friends and compete for the ultimate title of Tic Tac Toe
-      champion!
-    </p>
-
+    <h1>Tic Tac Toe!</h1>
     <form [formGroup]="setupForm" (ngSubmit)="onSubmit()">
       <app-form-container>
         @switch (setup.setupStep()) {

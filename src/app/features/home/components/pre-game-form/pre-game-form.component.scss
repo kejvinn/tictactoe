@@ -1,0 +1,133 @@
+div {
+  display: grid;
+  gap: var(--space);
+}
+
+fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: var(--space);
+}
+
+legend {
+  color: var(--color-accent);
+}
+
+label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.25rem 1rem;
+  border: 4px solid var(--color-shadow);
+  background: var(--color-surface);
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 6px 0 0 var(--color-shadow);
+  transition:
+    border-color 0.15s steps(3),
+    box-shadow 0.15s steps(3),
+    transform 0.08s steps(2);
+
+  &:hover {
+    border-color: var(--color-accent);
+  }
+
+  &:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 0 var(--color-shadow);
+  }
+
+  &:has(:checked) {
+    border-color: var(--color-accent);
+    box-shadow:
+      0 6px 0 0 var(--color-shadow),
+      0 0 14px var(--color-accent);
+  }
+}
+
+.mark-X,
+.mark-O {
+  gap: 1rem;
+  font-size: 2.5rem;
+
+  input[type='radio'] {
+    width: 2rem;
+    height: 2rem;
+
+    &:checked::before {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
+
+.mark-X {
+  color: var(--color-x);
+  text-shadow: 0 0 8px var(--color-x);
+}
+
+.mark-O {
+  color: var(--color-o);
+  text-shadow: 0 0 8px var(--color-o);
+}
+
+input[type='radio'] {
+  appearance: none;
+  display: grid;
+  place-content: center;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  border: 4px solid currentColor;
+  background: var(--color-bg);
+
+  &:checked::before {
+    content: '';
+    width: 0.65rem;
+    height: 0.65rem;
+    background: currentColor;
+    animation: pop 0.15s steps(3);
+  }
+}
+
+p {
+  flex-basis: 100%;
+  min-height: 1.2em;
+  margin: 0;
+  color: var(--color-x);
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+button {
+  justify-self: center;
+}
+
+@media (max-width: 480px) {
+  label {
+    padding: 1rem 0.75rem;
+  }
+
+  .mark-X,
+  .mark-O {
+    gap: 0.5rem;
+    font-size: 1.75rem;
+
+    input[type='radio'] {
+      width: 1.5rem;
+      height: 1.5rem;
+
+      &:checked::before {
+        width: 0.65rem;
+        height: 0.65rem;
+      }
+    }
+  }
+}

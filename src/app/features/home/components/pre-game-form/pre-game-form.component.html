@@ -2,14 +2,20 @@
   <fieldset>
     <legend>Player 1 mark</legend>
     @for (mark of marks; track mark) {
-      <label><input type="radio" formControlName="player1Mark" [value]="mark" /> {{ mark }}</label>
+      <label [class]="'mark-' + mark">
+        <input type="radio" formControlName="player1Mark" [value]="mark" />
+        {{ mark }}
+      </label>
     }
   </fieldset>
 
   <fieldset>
     <legend>Player 2 mark</legend>
     @for (mark of marks; track mark) {
-      <label><input type="radio" formControlName="player2Mark" [value]="mark" /> {{ mark }}</label>
+      <label [class]="'mark-' + mark">
+        <input type="radio" formControlName="player2Mark" [value]="mark" />
+        {{ mark }}
+      </label>
     }
   </fieldset>
 
@@ -20,9 +26,7 @@
         <input type="radio" formControlName="totalGames" [value]="count" /> Best of {{ count }}
       </label>
     }
-    @if (totalGamesError(); as error) {
-      <p>{{ error }}</p>
-    }
+    <p>{{ totalGamesError() }}</p>
   </fieldset>
 
   <button type="submit">Start tournament</button>

@@ -26,18 +26,18 @@ import { GameResult, Player, Scores } from '@core/models/tournament.model';
   `,
 })
 export class ResultsComponent {
-  players = input.required<readonly [Player, Player]>();
-  results = input.required<readonly GameResult[]>();
-  scores = input.required<Scores>();
-  winner = input.required<Player | null>();
-  playAgain = output<void>();
+  readonly players = input.required<readonly [Player, Player]>();
+  readonly results = input.required<readonly GameResult[]>();
+  readonly scores = input.required<Scores>();
+  readonly winner = input.required<Player | null>();
+  readonly playAgain = output<void>();
 
-  headline = computed(() => {
+  readonly headline = computed(() => {
     const winner = this.winner();
     return winner ? `${winner.name} wins the tournament!` : 'The tournament is a tie';
   });
 
-  rows = computed(() =>
+  readonly rows = computed(() =>
     this.results().map((result) => {
       const winner = this.players().find((player) => player.mark === result.winner);
       return { game: result.game, outcome: winner ? `${winner.name} won` : 'Draw' };

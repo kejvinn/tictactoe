@@ -5,7 +5,13 @@
     [progressLabel]="store.progressLabel()"
   />
 
-  <p>{{ status() }}</p>
+  <p
+    [class.over]="store.isRoundOver()"
+    [class.x]="store.roundWinner() === 'X'"
+    [class.o]="store.roundWinner() === 'O'"
+  >
+    {{ status() }}
+  </p>
 
   <app-board
     [board]="store.board()"
