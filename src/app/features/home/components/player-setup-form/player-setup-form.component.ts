@@ -6,21 +6,25 @@ type NameControl = 'player1Name' | 'player2Name';
 
 @Component({
   imports: [ReactiveFormsModule],
-  selector: 'app-local-form',
-  styleUrl: './local-form.component.scss',
-  templateUrl: './local-form.component.html',
+  selector: 'app-player-setup-form',
+  styleUrl: './player-setup-form.component.scss',
+  templateUrl: './player-setup-form.component.html',
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }],
 })
-export class LocalFormComponent {
-  setup = inject(SetupNavigationService);
+export class PlayerSetupFormComponent {
+  readonly setup = inject(SetupNavigationService);
   private readonly parentForm = inject(FormGroupDirective);
 
-  get local() {
-    return this.parentForm.form.controls['local'];
+  get playerSetup() {
+    return this.parentForm.form.controls['playerSetup'];
   }
 
   nameError(controlName: NameControl): string | null {
-    const control = this.local.get(controlName);
+    if (controlName === 'player2Name' && this.playerSetup.touched && this.playerSetup.hasError('sameNames')) {
+      return 'Names must be different';
+    }
+
+    const control = this.playerSetup.get(controlName);
     if (!control?.touched) {
       return null;
     }
@@ -32,9 +36,6 @@ export class LocalFormComponent {
     }
     if (control.hasError('maxlength')) {
       return 'Name can be at most 20 characters';
-    }
-    if (controlName === 'player2Name' && this.local.hasError('sameNames')) {
-      return 'Names must be different';
     }
     return null;
   }

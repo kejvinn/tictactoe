@@ -7,17 +7,23 @@ import { SetupNavigationService } from '@features/home/setup-navigation.service'
     .form-container {
       display: flex;
       flex-direction: column;
+      gap: var(--space);
+      text-align: left;
+    }
+
+    button {
+      align-self: flex-start;
     }
   `,
   template: `
     <div class="form-container">
-      @if (setup.showBackButton()) {
-        <button type="button" (click)="setup.goBack()">Back</button>
+      @if (setup.setupStep() === 'pre-game') {
+        <button type="button" (click)="setup.goTo('player-setup')">Back</button>
       }
       <ng-content />
     </div>
   `,
 })
 export class FormContainerComponent {
-  setup = inject(SetupNavigationService);
+  readonly setup = inject(SetupNavigationService);
 }

@@ -6,7 +6,7 @@ import { opposite } from '@core/rules/game-rules';
 import { GameCount, Mark } from '@core/models/tournament.model';
 import { TournamentStore } from '@core/store/tournament.store';
 import { distinctNames, nonBlank } from './setup.validators';
-import { LocalFormComponent } from './components/local-form/local-form.component';
+import { PlayerSetupFormComponent } from './components/player-setup-form/player-setup-form.component';
 import { PreGameFormComponent } from './components/pre-game-form/pre-game-form.component';
 import { FormContainerComponent } from './components/form-container/form-container.component';
 import { SetupNavigationService } from './setup-navigation.service';
@@ -17,7 +17,7 @@ import { LeaderboardComponent } from '@shared/components/leaderboard/leaderboard
   imports: [
     ReactiveFormsModule,
     RouterLink,
-    LocalFormComponent,
+    PlayerSetupFormComponent,
     PreGameFormComponent,
     FormContainerComponent,
     ModalComponent,
@@ -37,7 +37,7 @@ export class HomeComponent {
   leaderboardOpen = signal(false);
 
   setupForm = this.fb.group({
-    local: this.fb.group(
+    playerSetup: this.fb.group(
       {
         player1Name: ['', [Validators.required, nonBlank, Validators.maxLength(20)]],
         player2Name: ['', [Validators.required, nonBlank, Validators.maxLength(20)]],
@@ -62,7 +62,7 @@ export class HomeComponent {
   }
 
   onSubmit(): void {
-    const { local, preGame } = this.setupForm.getRawValue();
+    const { playerSetup, preGame } = this.setupForm.getRawValue();
 
     if (this.setupForm.invalid || preGame.totalGames === null) {
       this.setupForm.markAllAsTouched();
@@ -71,8 +71,8 @@ export class HomeComponent {
 
     this.store.start({
       players: [
-        { name: local.player1Name.trim(), mark: preGame.player1Mark },
-        { name: local.player2Name.trim(), mark: preGame.player2Mark },
+        { name: playerSetup.player1Name.trim(), mark: preGame.player1Mark },
+        { name: playerSetup.player2Name.trim(), mark: preGame.player2Mark },
       ],
       totalGames: preGame.totalGames,
     });

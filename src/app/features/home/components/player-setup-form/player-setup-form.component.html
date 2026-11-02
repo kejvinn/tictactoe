@@ -1,4 +1,4 @@
-<div formGroupName="local">
+<div formGroupName="playerSetup">
   <label for="player1Name">Player 1 name</label>
   <input id="player1Name" type="text" formControlName="player1Name" />
   @if (nameError('player1Name'); as error) {
@@ -11,7 +11,7 @@
     <p>{{ error }}</p>
   }
 
-  <button type="button" [disabled]="local.invalid" (click)="setup.goTo('pre-game')">
+  <button type="button" [disabled]="playerSetup.invalid" (click)="setup.goTo('pre-game')">
     Next Stage
   </button>
 </div>

@@ -1,17 +1,12 @@
-import { computed, Service, signal } from '@angular/core';
+import { Service, signal } from '@angular/core';
 
-export type FormStep = 'local' | 'pre-game';
+export type FormStep = 'player-setup' | 'pre-game';
 
 @Service()
 export class SetupNavigationService {
-  setupStep = signal<FormStep>('local');
-  showBackButton = computed(() => this.setupStep() === 'pre-game');
+  readonly setupStep = signal<FormStep>('player-setup');
 
   goTo(step: FormStep): void {
     this.setupStep.set(step);
-  }
-
-  goBack(): void {
-    this.setupStep.set('local');
   }
 }

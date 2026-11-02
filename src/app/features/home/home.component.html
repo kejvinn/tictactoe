@@ -9,8 +9,8 @@
     <form [formGroup]="setupForm" (ngSubmit)="onSubmit()">
       <app-form-container>
         @switch (setup.setupStep()) {
-          @case ('local') {
-            <app-local-form />
+          @case ('player-setup') {
+            <app-player-setup-form />
           }
           @case ('pre-game') {
             <app-pre-game-form />
